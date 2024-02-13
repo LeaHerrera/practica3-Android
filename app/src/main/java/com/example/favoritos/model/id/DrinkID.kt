@@ -1,6 +1,6 @@
-package com.example.favoritos.model
+package com.example.favoritos.model.id
 
-data class Drink(
+data class DrinkID(
     val dateModified: String,
     val idDrink: String,
     val strAlcoholic: String,

@@ -16,7 +16,7 @@ import com.example.favoritos.ui.theme.FavoritosTheme
 import com.example.favoritos.view.ScreenDetails
 import com.example.favoritos.view.ScreenScroll
 import com.example.favoritos.view.SplashScreen
-import com.example.favoritos.viewmodel.MyViewModel
+import com.example.favoritos.viewmodel.APIViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +24,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             FavoritosTheme {
 
-                val myViewModel by viewModels<MyViewModel>()
+                val myViewModel by viewModels<APIViewModel>()
                 val navigation = rememberNavController()
 
                 Surface(
