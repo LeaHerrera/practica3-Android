@@ -22,7 +22,7 @@ interface InterfaceAPI {
 
     @GET("list.php?c=list")
     suspend fun getCateories(): Response<Categorias>
-
+    
     companion object {
         val BASE_URL = "https://www.thecocktaildb.com/api/json/v1/1/"
         fun create(): InterfaceAPI {
