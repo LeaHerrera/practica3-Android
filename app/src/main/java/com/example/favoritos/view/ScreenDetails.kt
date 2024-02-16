@@ -5,4 +5,7 @@ import androidx.navigation.NavHostController
 import com.example.favoritos.viewmodel.APIViewModel
 
 @Composable
-fun ScreenDetails(navigation: NavHostController, myViewModel: APIViewModel){}
+fun ScreenDetails(navigation: NavHostController, myViewModel: APIViewModel , id:String){
+
+
+}

@@ -2,23 +2,21 @@ package com.example.favoritos.API
 
 import com.example.favoritos.model.categorias.Categorias
 import com.example.favoritos.model.id.Data
+import com.example.favoritos.model.lista.DataCategorie
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface InterfaceAPI {
 
-    @GET("filter.php?f={letra}")
-    suspend fun getFirsChar( @Path("letra") char:String ): Response<Data>
-  //  suspend fun getCategorie(): Response<Data>
-
-    @GET("filter.php?i={id}")
-    suspend fun getId( @Path("id") charId:String ): Response<Data>
-    @GET("filter.php?c={categoria}")
-    suspend fun getDrinkCategorie( @Path("categoria") categorie:String ): Response<Data>
+    @GET("filter.php")
+    suspend fun getId( @Query("i") Id:String ): Response<Data>
+    @GET("filter.php")
+    suspend fun getDrinkCategorie( @Query("c") categorie:String ): Response<DataCategorie>
 
     @GET("list.php?c=list")
     suspend fun getCateories(): Response<Categorias>
