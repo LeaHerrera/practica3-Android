@@ -44,8 +44,8 @@ class APIViewModel:ViewModel(){
         _mostrarCategoria.value = false
     }
 
-    fun setId(Id: String){
-        _id.value = Id
+    fun setId(id: String){
+        _id.value = id
     }
 
 

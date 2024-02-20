@@ -3,6 +3,7 @@ package com.example.favoritos.view
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,6 +34,7 @@ import com.example.favoritos.model.categorias.Categorias
 import com.example.favoritos.model.categorias.Drink
 import com.example.favoritos.model.lista.DataCategorie
 import com.example.favoritos.model.lista.DrinkCategorie
+import com.example.favoritos.navigation.Routes
 import com.example.favoritos.viewmodel.APIViewModel
 
 
@@ -59,7 +61,7 @@ fun ScreenScroll(navigation: NavHostController, apiViewModel: APIViewModel){
         } else {
             LazyColumn() {
                 items(drinkCat.drinks) {
-                    CategoryItems(Drink = it)
+                    CategoryItems(drink = it , navigation)
                 }
             }
         }
@@ -95,8 +97,8 @@ fun CharacterItem(Drink: Drink , apiViewModel: APIViewModel) {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-            .padding(16.dp)
-            .fillMaxWidth()
+                .padding(16.dp)
+                .fillMaxWidth()
         ){
             Text(
                 text = Drink.strCategory,
@@ -112,7 +114,7 @@ fun CharacterItem(Drink: Drink , apiViewModel: APIViewModel) {
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CategoryItems(Drink: DrinkCategorie) {
+fun CategoryItems(drink: DrinkCategorie , navigation: NavHostController) {
     Card(
         border = BorderStroke(2.dp, Color.LightGray),
         shape = RoundedCornerShape(8.dp),
@@ -123,17 +125,23 @@ fun CategoryItems(Drink: DrinkCategorie) {
             .fillMaxWidth()
         ){
             GlideImage(
-                model = Drink.strDrinkThumb,
+                model = drink.strDrinkThumb,
                 contentDescription = "Character Image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier.size(100.dp)
             )
+            Column {
+                Text(
+                    text = drink.strDrink,
+                    style = MaterialTheme.typography.bodyLarge,
+                    textAlign = TextAlign.Center, modifier = Modifier.fillMaxSize()
+                )
+                Button(onClick = { navigation.navigate(Routes.PantallaInfo.createRoute(drink.idDrink)) }) {
+                    Text(text = "HOLA")
+                }
+            }
 
-            Text(
-                text = Drink.strDrink,
-                style = MaterialTheme.typography.bodyLarge,
-                textAlign = TextAlign.Center, modifier = Modifier.fillMaxSize()
-            )
+
         }
     }
 }
