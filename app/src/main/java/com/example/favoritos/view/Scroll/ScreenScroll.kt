@@ -1,7 +1,6 @@
-package com.example.favoritos.view
+package com.example.favoritos.view.Scroll
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -42,27 +41,32 @@ import com.example.favoritos.viewmodel.APIViewModel
 fun ScreenScroll(navigation: NavHostController, apiViewModel: APIViewModel){
 //RECYCLER VIEW
     val showLoading: Boolean by apiViewModel.loading.observeAsState(true)
-    val categorias: Categorias by apiViewModel.characters.observeAsState(Categorias(emptyList()))
-
     val showCategorias: Boolean by apiViewModel.mostrarCategoria.observeAsState(true)
-    val drinkCat: DataCategorie by apiViewModel.dataCat.observeAsState(DataCategorie(emptyList()))
 
     importAPI( apiViewModel , showCategorias )
 
     if(showLoading){
         Cargando()
     } else {
-        if (showCategorias){
-            LazyColumn() {
-                items(categorias.drinks) {
-                    CharacterItem(Drink = it , apiViewModel = apiViewModel)
-                }
+        ScrollItems(nav = navigation , api = apiViewModel , show = showCategorias)
+    }
+}
+
+@Composable
+fun ScrollItems(nav:NavHostController , api: APIViewModel , show: Boolean){
+    val categorias: Categorias by api.characters.observeAsState(Categorias(emptyList()))
+    val drinkCat: DataCategorie by api.dataCat.observeAsState(DataCategorie(emptyList()))
+
+    if (show){
+        LazyColumn() {
+            items(categorias.drinks) {
+                CharacterItem(Drink = it , apiViewModel = api)
             }
-        } else {
-            LazyColumn() {
-                items(drinkCat.drinks) {
-                    CategoryItems(drink = it , navigation , apiViewModel)
-                }
+        }
+    } else {
+        LazyColumn() {
+            items(drinkCat.drinks) {
+                CategoryItems(drink = it , nav , api)
             }
         }
     }
@@ -136,10 +140,9 @@ fun CategoryItems(drink: DrinkCategorie , navigation: NavHostController , api: A
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center, modifier = Modifier.fillMaxSize()
                 )
-                Text(text = drink.idDrink)
                 Button(onClick = {
                     api.setId(drink.idDrink)
-                    navigation.navigate(Routes.PantallaInfo.createRoute(drink.idDrink))
+                    navigation.navigate(Routes.PantallaInfo.route)
                 }) {
                     Text(text = "HOLA")
                 }
@@ -149,14 +152,3 @@ fun CategoryItems(drink: DrinkCategorie , navigation: NavHostController , api: A
         }
     }
 }
-
-/*
-
-GlideImage(
-model = Drink.strDrinkThumb,
-contentDescription = "Character Image",
-contentScale = ContentScale.Crop,
-modifier = Modifier.size(100.dp)
-)
-
- */

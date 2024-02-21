@@ -1,4 +1,4 @@
-package com.example.favoritos.view
+package com.example.favoritos.view.Splash
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
