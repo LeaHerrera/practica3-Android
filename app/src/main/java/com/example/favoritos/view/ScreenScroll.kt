@@ -61,7 +61,7 @@ fun ScreenScroll(navigation: NavHostController, apiViewModel: APIViewModel){
         } else {
             LazyColumn() {
                 items(drinkCat.drinks) {
-                    CategoryItems(drink = it , navigation)
+                    CategoryItems(drink = it , navigation , apiViewModel)
                 }
             }
         }
@@ -114,7 +114,7 @@ fun CharacterItem(Drink: Drink , apiViewModel: APIViewModel) {
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CategoryItems(drink: DrinkCategorie , navigation: NavHostController) {
+fun CategoryItems(drink: DrinkCategorie , navigation: NavHostController , api: APIViewModel) {
     Card(
         border = BorderStroke(2.dp, Color.LightGray),
         shape = RoundedCornerShape(8.dp),
@@ -136,7 +136,11 @@ fun CategoryItems(drink: DrinkCategorie , navigation: NavHostController) {
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center, modifier = Modifier.fillMaxSize()
                 )
-                Button(onClick = { navigation.navigate(Routes.PantallaInfo.createRoute(drink.idDrink)) }) {
+                Text(text = drink.idDrink)
+                Button(onClick = {
+                    api.setId(drink.idDrink)
+                    navigation.navigate(Routes.PantallaInfo.createRoute(drink.idDrink))
+                }) {
                     Text(text = "HOLA")
                 }
             }

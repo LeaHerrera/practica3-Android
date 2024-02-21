@@ -13,8 +13,8 @@ import retrofit2.http.Query
 
 interface InterfaceAPI {
 
-    @GET("filter.php")
-    suspend fun getId( @Query("i") Id:String ): Response<Data>
+    @GET("lookup.php")
+    suspend fun getId( @Query("i") id:String ): Response<Data>
     @GET("filter.php")
     suspend fun getDrinkCategorie( @Query("c") categorie:String ): Response<DataCategorie>
 

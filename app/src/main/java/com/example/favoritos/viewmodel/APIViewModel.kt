@@ -1,6 +1,5 @@
 package com.example.favoritos.viewmodel
 
-import android.provider.ContactsContract
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -79,23 +78,21 @@ class APIViewModel:ViewModel(){
                 if(response.isSuccessful){
                     _dataCat.value = response.body()
                     _loading.value = false
-                }
-                else{
+                } else{
                     Log.e("Error :", response.message())
                 }
             }
         }
     }
 
-    fun getIdDrink(){
+    fun getDrinkById(){
         CoroutineScope(Dispatchers.IO).launch {
             val response = repository.getIdDrink(_id.value!!)
             withContext(Dispatchers.Main) {
                 if(response.isSuccessful){
                     _idDrink.value = response.body()
                     _loading.value = false
-                }
-                else{
+                } else{
                     Log.e("Error :", response.message())
                 }
             }
