@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.favoritos.navigation.Routes
 import com.example.favoritos.ui.theme.FavoritosTheme
 import com.example.favoritos.view.Detail.ScreenDetails
+import com.example.favoritos.view.PantallaPrincipal.Favoritos.view.ScreenFavory
 import com.example.favoritos.view.PantallaPrincipal.Scroll.ScreenScroll
 import com.example.favoritos.view.Splash.SplashScreen
 import com.example.favoritos.viewmodel.APIViewModel
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         composable(Routes.PantallaSplash.route) { SplashScreen(navigation) }
                         composable(Routes.PantallaPrincipal.route) { ScreenScroll(navigation, myViewModel) }
                         composable(Routes.PantallaInfo.route) { ScreenDetails(navigation, myViewModel) }
-                        composable(Routes.PantallaFav.route) { ScreenDetails(navigation, myViewModel) }
+                        composable(Routes.PantallaFav.route) { ScreenFavory(navigation, myViewModel) }
                     }
                 }
             }

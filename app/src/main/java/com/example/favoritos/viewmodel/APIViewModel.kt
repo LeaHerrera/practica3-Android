@@ -43,10 +43,17 @@ class APIViewModel:ViewModel(){
         _mostrarCategoria.value = false
     }
 
+    fun setCategorie(){
+        _mostrarCategoria.value = false
+    }
+
     fun setId(id: String){
         _id.value = id
     }
 
+    fun getCategoria(): String? {
+        return _categoria.value
+    }
 
     fun setOcultar(){
         _mostrarCategoria.value = true
