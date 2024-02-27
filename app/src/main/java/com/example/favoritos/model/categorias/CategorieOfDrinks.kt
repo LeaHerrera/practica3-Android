@@ -1,5 +1,5 @@
 package com.example.favoritos.model.categorias
 
-data class Drink(
+data class CategorieOfDrinks(
     val strCategory: String
 )

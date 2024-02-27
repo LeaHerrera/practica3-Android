@@ -5,7 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.navigation.NavHostController
-import com.example.favoritos.view.PantallaPrincipal.Scaffold.controlers.MyScaffoldScroll
+import com.example.favoritos.view.Scaffold.scroleable.MyScaffoldScroll
 import com.example.favoritos.view.PantallaPrincipal.Scroll.controlers.importAPI
 import com.example.favoritos.view.PantallaPrincipal.Scroll.view.Cargando
 import com.example.favoritos.viewmodel.APIViewModel

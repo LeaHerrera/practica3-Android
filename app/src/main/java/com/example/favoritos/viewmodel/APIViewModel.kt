@@ -4,8 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.favoritos.API.Repository
+import com.example.favoritos.model.DataBase.Drink
 import com.example.favoritos.model.categorias.Categorias
-import com.example.favoritos.model.categorias.Drink
+import com.example.favoritos.model.categorias.CategorieOfDrinks
 import com.example.favoritos.model.id.Data
 import com.example.favoritos.model.lista.DataCategorie
 import kotlinx.coroutines.CoroutineScope
@@ -17,8 +18,6 @@ class APIViewModel:ViewModel(){
 
     private val repository = Repository()
 
-    private val _loading = MutableLiveData(true)
-    val loading = _loading
 
     //CATEGORIAS
     private val _characters = MutableLiveData<Categorias>()
@@ -35,11 +34,33 @@ class APIViewModel:ViewModel(){
     private var _categoria = MutableLiveData("")
     private var _id = MutableLiveData("")
 
+    //SHOW's
     private var _mostrarCategoria = MutableLiveData(true)
     val mostrarCategoria = _mostrarCategoria
 
-    fun setCategorie(drink: Drink){
-        _categoria.value = drink.strCategory
+    private val _loading = MutableLiveData(true)
+    val loading = _loading
+
+    private var _mostrarIngredientes = MutableLiveData(true)
+    val mostrarIngredientes = _mostrarIngredientes
+
+    //DATABASE (FAVORITOS)
+    private val _isFavorite = MutableLiveData(false)
+    val isFavorite = _isFavorite
+    private val _favorites = MutableLiveData<MutableList<Drink>>()
+    val favorites = _favorites
+
+
+    //METODOS
+    fun setMostrarIngredientes(){
+        _mostrarIngredientes.value = false
+    }
+
+    fun setOcultarIngredientes(){
+        _mostrarIngredientes.value = true
+    }
+    fun setCategorie(categorieOfDrinks: CategorieOfDrinks){
+        _categoria.value = categorieOfDrinks.strCategory
         _mostrarCategoria.value = false
     }
 
@@ -103,6 +124,37 @@ class APIViewModel:ViewModel(){
                     Log.e("Error :", response.message())
                 }
             }
+        }
+    }
+
+    fun getFavorites(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.getFavorites()
+            withContext(Dispatchers.Main){
+                _favorites.value = response
+                _loading.value = false
+            }
+        }
+    }
+
+    fun isFavorite(drink: Drink){
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = repository.isFavorite(drink)
+            withContext(Dispatchers.Main){
+                _isFavorite.value = response
+            }
+        }
+    }
+
+    fun saveAsFavorite(drink: Drink){
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.saveAsFavorite(drink)
+        }
+    }
+
+    fun deleteFavorite(drink: Drink){
+        CoroutineScope(Dispatchers.IO).launch {
+            repository.deleteFavorite(drink)
         }
     }
 

@@ -1,4 +1,4 @@
-package com.example.favoritos.view.PantallaPrincipal.Scaffold.controlers
+package com.example.favoritos.view.Scaffold.scroleable
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,8 +9,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import com.example.favoritos.model.BotomNavigation.BottomNavigationScreens
-import com.example.favoritos.view.PantallaPrincipal.Scaffold.view.MyBottomBar
-import com.example.favoritos.view.PantallaPrincipal.Scaffold.view.MyTopAppBarS
+import com.example.favoritos.view.Scaffold.general.MyBottomBar
+import com.example.favoritos.view.Scaffold.scroleable.MyTopAppBarS
 import com.example.favoritos.view.PantallaPrincipal.Scroll.view.ScrollItems
 import com.example.favoritos.viewmodel.APIViewModel
 

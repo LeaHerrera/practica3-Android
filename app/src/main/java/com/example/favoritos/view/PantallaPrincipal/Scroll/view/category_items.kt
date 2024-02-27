@@ -17,12 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.favoritos.model.categorias.Drink
+import com.example.favoritos.model.categorias.CategorieOfDrinks
 import com.example.favoritos.viewmodel.APIViewModel
 
 
 @Composable
-fun CharacterItem(Drink: Drink, apiViewModel: APIViewModel) {
+fun CharacterItem(CategorieOfDrinks: CategorieOfDrinks, apiViewModel: APIViewModel) {
     Card(
         border = BorderStroke(2.dp, Color.LightGray),
         shape = RoundedCornerShape(8.dp),
@@ -36,12 +36,12 @@ fun CharacterItem(Drink: Drink, apiViewModel: APIViewModel) {
                 .fillMaxWidth()
         ){
             Text(
-                text = Drink.strCategory,
+                text = CategorieOfDrinks.strCategory,
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center, modifier = Modifier.fillMaxSize(0.5f)
             )
             Button(onClick = {
-                apiViewModel.setCategorie(Drink)
+                apiViewModel.setCategorie(CategorieOfDrinks)
                 apiViewModel.setResetLoading()
             }) {
                 Text(text = "hola")

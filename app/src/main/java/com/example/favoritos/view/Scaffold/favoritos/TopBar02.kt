@@ -1,4 +1,4 @@
-package com.example.favoritos.view.PantallaPrincipal.Scaffold.view
+package com.example.favoritos.view.Scaffold.favoritos
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
@@ -12,9 +12,9 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyTopAppBar(titulo:String) {
+fun MyTopAppBarF(titulo:String) {
     TopAppBar(
-        title = { Text(text = titulo, fontWeight = FontWeight.Black, fontSize = 50.sp) },
+        title = { Text(text = titulo, fontWeight = FontWeight.Black, fontSize = 30.sp) },
         colors = TopAppBarDefaults.largeTopAppBarColors(
             containerColor = Color.Magenta,
             titleContentColor = Color.White

@@ -1,4 +1,4 @@
-package com.example.favoritos.view.PantallaPrincipal.Scaffold.view
+package com.example.favoritos.view.Scaffold.general
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem

@@ -18,8 +18,8 @@ fun ScrollItems(nav: NavHostController, api: APIViewModel, show: Boolean){
 
     if (show){
         LazyColumn() {
-            items(categorias.drinks) {
-                CharacterItem(Drink = it , apiViewModel = api)
+            items(categorias.categorieOfDrinks) {
+                CharacterItem(CategorieOfDrinks = it , apiViewModel = api)
             }
         }
     } else {
