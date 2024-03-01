@@ -1,14 +1,17 @@
 package com.example.favoritos.viewmodel
 
 import android.util.Log
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.favoritos.API.Repository
-import com.example.favoritos.model.DataBase.Drink
 import com.example.favoritos.model.categorias.Categorias
 import com.example.favoritos.model.categorias.CategorieOfDrinks
 import com.example.favoritos.model.id.Data
 import com.example.favoritos.model.lista.DataCategorie
+import com.example.favoritos.model.lista.DrinkByCategorie
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,6 +29,9 @@ class APIViewModel:ViewModel(){
     //LISTA CATEGORIA
     private val _dataCat = MutableLiveData<DataCategorie>()
     val dataCat = _dataCat
+
+    private val _drinkByCategorie = MutableLiveData<DrinkByCategorie>()
+    val drinkByCategorie = _drinkByCategorie
 
     //ID DRINK
     private val _idDrink = MutableLiveData<Data>()
@@ -47,11 +53,20 @@ class APIViewModel:ViewModel(){
     //DATABASE (FAVORITOS)
     private val _isFavorite = MutableLiveData(false)
     val isFavorite = _isFavorite
-    private val _favorites = MutableLiveData<MutableList<Drink>>()
+    private val _favorites = MutableLiveData<MutableList<DrinkByCategorie>>()
     val favorites = _favorites
 
+    private val _iconFavory = MutableLiveData(Icons.Default.FavoriteBorder)
+    val iconFavory = _iconFavory
 
     //METODOS
+
+    fun llenarCorazon(){
+        _iconFavory.value = Icons.Default.Favorite
+    }
+    fun vaciarCorazon(){
+        _iconFavory.value = Icons.Default.FavoriteBorder
+    }
     fun setMostrarIngredientes(){
         _mostrarIngredientes.value = false
     }
@@ -68,8 +83,9 @@ class APIViewModel:ViewModel(){
         _mostrarCategoria.value = false
     }
 
-    fun setId(id: String){
-        _id.value = id
+    fun setIdAndDrink(drink: DrinkByCategorie){
+        _id.value = drink.idDrink
+        _drinkByCategorie.value = drink
     }
 
     fun getCategoria(): String? {
@@ -137,22 +153,27 @@ class APIViewModel:ViewModel(){
         }
     }
 
-    fun isFavorite(drink: Drink){
+    fun isFavorite(id:String){
         CoroutineScope(Dispatchers.IO).launch {
-            val response = repository.isFavorite(drink)
+            val response = repository.isFavorite(id)
             withContext(Dispatchers.Main){
                 _isFavorite.value = response
             }
         }
+        if (_isFavorite.value!!){
+            llenarCorazon()
+        } else {
+            vaciarCorazon()
+        }
     }
 
-    fun saveAsFavorite(drink: Drink){
+    fun saveAsFavorite(drink: DrinkByCategorie){
         CoroutineScope(Dispatchers.IO).launch {
             repository.saveAsFavorite(drink)
         }
     }
 
-    fun deleteFavorite(drink: Drink){
+    fun deleteFavorite(drink: DrinkByCategorie){
         CoroutineScope(Dispatchers.IO).launch {
             repository.deleteFavorite(drink)
         }

@@ -1,6 +1,7 @@
 package com.example.favoritos.view.PantallaPrincipal.Scroll.view
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,18 +22,24 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
-import com.example.favoritos.model.lista.DrinkCategorie
+import com.example.favoritos.model.lista.DrinkByCategorie
 import com.example.favoritos.navigation.Routes
 import com.example.favoritos.viewmodel.APIViewModel
 
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun ItemsByCategory(drink: DrinkCategorie, navigation: NavHostController, api: APIViewModel) {
+fun ItemsByCategory(drink: DrinkByCategorie, navigation: NavHostController, api: APIViewModel) {
     Card(
         border = BorderStroke(2.dp, Color.LightGray),
         shape = RoundedCornerShape(8.dp),
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier
+            .padding(8.dp)
+            .clickable {
+            api.setIdAndDrink(drink)
+            navigation.navigate(Routes.PantallaInfo.route)
+            api.setResetLoading()
+        }
     ) {
         Row(modifier = Modifier
             .padding(16.dp)
@@ -50,16 +57,7 @@ fun ItemsByCategory(drink: DrinkCategorie, navigation: NavHostController, api: A
                     style = MaterialTheme.typography.bodyLarge,
                     textAlign = TextAlign.Center, modifier = Modifier.fillMaxSize()
                 )
-                Button(onClick = {
-                    api.setId(drink.idDrink)
-                    navigation.navigate(Routes.PantallaInfo.route)
-                    api.setResetLoading()
-                }) {
-                    Text(text = "HOLA")
-                }
             }
-
-
         }
     }
 }

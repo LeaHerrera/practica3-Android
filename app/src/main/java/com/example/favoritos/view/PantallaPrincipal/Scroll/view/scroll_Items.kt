@@ -2,6 +2,7 @@ package com.example.favoritos.view.PantallaPrincipal.Scroll.view
 
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -18,8 +19,8 @@ fun ScrollItems(nav: NavHostController, api: APIViewModel, show: Boolean){
 
     if (show){
         LazyColumn() {
-            items(categorias.categorieOfDrinks) {
-                CharacterItem(CategorieOfDrinks = it , apiViewModel = api)
+            items(categorias.drinks) {
+                CharacterItem(CategorieOfDrinks = it, apiViewModel = api)
             }
         }
     } else {
@@ -29,4 +30,6 @@ fun ScrollItems(nav: NavHostController, api: APIViewModel, show: Boolean){
             }
         }
     }
+
+
 }

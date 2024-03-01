@@ -1,5 +1,5 @@
 package com.example.favoritos.model.lista
 
 data class DataCategorie(
-    val drinks: List<DrinkCategorie>
+    val drinks: List<DrinkByCategorie>
 )

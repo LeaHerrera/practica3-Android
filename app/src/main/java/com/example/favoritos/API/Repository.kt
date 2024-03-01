@@ -1,7 +1,7 @@
 package com.example.favoritos.API
 
-import com.example.favoritos.model.DataBase.Drink
 import com.example.favoritos.model.DataBase.DrinkApplication
+import com.example.favoritos.model.lista.DrinkByCategorie
 
 class Repository {
 
@@ -16,8 +16,8 @@ class Repository {
     //DATABASE
     val daoInterface = DrinkApplication.database.drinkDao()
 
-    suspend fun saveAsFavorite(drink: Drink) = daoInterface.addDink(drink)
-    suspend fun deleteFavorite(drink: Drink) = daoInterface.deleteDrink(drink)
-    suspend fun isFavorite(drink: Drink) = daoInterface.getDrinkById(drink.id).isNotEmpty()
+    suspend fun saveAsFavorite(drink: DrinkByCategorie) = daoInterface.addDink(drink)
+    suspend fun deleteFavorite(drink: DrinkByCategorie) = daoInterface.deleteDrink(drink)
+    suspend fun isFavorite(id: String) = daoInterface.getDrinkById(id).isNotEmpty()
     suspend fun getFavorites() = daoInterface.getAllDrinks()
 }
